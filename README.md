@@ -26,22 +26,23 @@ npm install react-native-kf5sdk
 ```ruby
 npm install -g rnpm
 ```
-安装完rnpm后执行以下命令
+安装完rnpm后执行以下命令,link成功命令行会提示'rnpm-link info Linking react-native-kf5sdk ios dependency'
+
 ```
 rnpm link react-native-kf5sdk
-//  link成功命令行会提示
-//  rnpm info Linking react-native-kf5sdk ios dependency
 ```
 或者你还可以手动配置
 ```
-打开XCode's工程中, 右键点击Libraries文件夹 ➜ Add Files to <...> b.去node_modules ➜ react-native-kf5sdk ➜ ios ➜ 选择 RCTKF5SDK.xcodeproj c.在工程Build Phases ➜ Link Binary With Libraries中添加libRCTKF5SDK.a
+a.打开XCode's工程中, 右键点击Libraries文件夹 ➜ Add Files to <...> 
+b.去node_modules ➜ react-native-kf5sdk ➜ ios ➜ 选择 RCTKF5SDK.xcodeproj 
+c.在工程Build Phases ➜ Link Binary With Libraries中添加libRCTKF5SDK.a
 ```
 
 ##### 工程配置
 
 ###### 一、添加需要的系统依赖库
 
-在工程target的Build Phases->Link Binary with Libraries中加入libsqlite3.tbd、JavaScriptCore.framework、Photos.framework、AssetsLibrary.framework等依赖库
+在工程target的Build Phases->Link Binary with Libraries中加入```libsqlite3.tbd```、```JavaScriptCore.framework```、```Photos.framework```、```AssetsLibrary.framework```等依赖库
 
 ###### 二、SDK需要使用以下权限,进入工程中的info.plist，添加以下权限  
 
@@ -57,6 +58,10 @@ RCTKF5SDK/Bundle是kf5sdk中需要使用的图片资源和国际化资源
 ###### 四、如果在原生代码中需要引入KF5SDK
 
 在工程target的Build Setting->Library Search Paths中添加```$(SRCROOT)/../node_modules/react-native-kf5sdk/ios/RCTKF5SDK```,在Header Search Paths中添加```$(SRCROOT)/../node_modules/react-native-kf5sdk/ios/RCTKF5SDK```
+
+###### 提醒事项
+
+如果运行```react-native run-ios```提示类似错误信息```undefined is not an object (evaluating 'kf5sdk.init.KF5')```，请详细确认工程配置的第一、二、三步是否有遗漏，如果没有遗漏还是出现这个提示，请直接使用xcode运行工程，查看具体的报错信息，将报错信息完整截图后，提交[Issues](https://github.com/KF5/react-native-kf5sdk/issues/new)，我们将协助您处理。
 
 #### Android
 
@@ -132,6 +137,7 @@ initKF5({params}, callback(result))
 | :------------- | :----- | :------- | :----------------------------------------------------------- |
 | hostName       | 字符串 | 是       | 注册后的域名                                                 |
 | appId          | 字符串 | 是       | 注册kf5后，从后台添加APP后获取                               |
+| appName        | 字符串 | 可选     | 应用名称，默认值：iOSAPP/AndroidAPP                          |
 | email          | 字符串 | 可选     | (手机和邮箱,必须传其一)用户的邮箱                            |
 | phone          | 字符串 | 可选     | (手机和邮箱,必须传其一)用户的手机号                          |
 | verifyUserType | 整型   | 可选     | 用户信息验证方式,只能传1(验证邮箱)或2(验证手机号),只有当邮箱和手机号同时传入时才生效,默认为1(验证邮箱)<br/>- 默认值：1/2 |
@@ -151,7 +157,8 @@ import kf5sdk from 'react-native-kf5sdk';
 
 var param = {  
     hostName : "xxx.kf5.com",  
-    appId : "xxxxxxx",  
+    appId : "xxxxxxx",
+    appName : "iOSAPP",
     email : "",  
     phone : "",
     verifyUserType : 1,

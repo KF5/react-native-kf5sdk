@@ -49,6 +49,8 @@ RCT_EXPORT_METHOD(initKF5:(NSDictionary *)paramDict completion:(RCTResponseSende
     NSString *hostName = [paramDict stringValueForKey:@"hostName" defaultValue:nil];
     // 云客服密钥
     NSString *appId = [paramDict stringValueForKey:@"appId" defaultValue:nil];
+    // 公司名称
+    [KFConfig shareConfig].appName = [paramDict stringValueForKey:@"appName" defaultValue:nil];
     // 初始化公司
     [KFUserManager initializeWithHostName:hostName appId:appId];
     

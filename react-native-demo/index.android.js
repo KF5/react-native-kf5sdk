@@ -17,10 +17,8 @@ import {
 } from 'react-native';
 
 const kf5sdk = NativeModules.KF5SDK;
-const HelloWorld = NativeModules.HelloWorld;
 
-
-export default class kf5demo extends Component {
+export default class kf5sdkDemo extends Component {
 
 
 _callBack(result){
@@ -159,4 +157,4 @@ _callBack(result){
  })
 
 
-AppRegistry.registerComponent('kf5demo', () => kf5demo);
+AppRegistry.registerComponent('kf5sdkDemo', () => kf5sdkDemo);

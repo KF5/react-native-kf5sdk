@@ -1,4 +1,4 @@
-rootProject.name = 'ReactNativeTestApp'
+rootProject.name = 'kf5sdkDemo'
 
 include ':app'
 include ':react-native-kf5sdk'
