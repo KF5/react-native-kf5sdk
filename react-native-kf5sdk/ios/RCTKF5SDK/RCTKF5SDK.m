@@ -216,11 +216,21 @@ RCT_EXPORT_METHOD(setTopBarColor:(NSDictionary *)paramDict){
 
 - (void)presentViewController:(UIViewController *)viewController {
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
-    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+    viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:KF5Localized(@"kf5_close") style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
     viewController.hidesBottomBarWhenPushed = YES;
+    
     [nav.navigationBar setTintColor:self.textColor];
     [nav.navigationBar setBarTintColor:self.navColor];
-    [nav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:self.textColor,NSFontAttributeName:self.centerTextFont}];
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (self.textColor) {
+        [attributes setObject:self.textColor forKey:NSForegroundColorAttributeName];
+    }
+    if (self.centerTextFont) {
+        [attributes setObject:self.centerTextFont forKey:NSFontAttributeName];
+    }
+    if (attributes.allKeys.count > 0) {
+        [nav.navigationBar setTitleTextAttributes:attributes];
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
     });
