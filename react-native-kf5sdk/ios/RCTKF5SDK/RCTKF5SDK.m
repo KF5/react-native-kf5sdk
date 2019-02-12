@@ -43,6 +43,16 @@ RCT_EXPORT_MODULE();
 
 #pragma mark - 初始化
 RCT_EXPORT_METHOD(initKF5:(NSDictionary *)paramDict completion:(RCTResponseSenderBlock)callback){
+    
+    //  添加来源
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    SEL sel = @selector(setSource:);
+#pragma clang diagnostic pop
+    if ([KFHttpTool respondsToSelector:sel]) {
+        [KFHttpTool performSelector:sel withObject:@"react-native"];
+    }
+    
     // 设置语言
     [KFHelper setLocalLanguage:[paramDict stringValueForKey:@"language" defaultValue:nil]];
     // 云客服地址
@@ -73,7 +83,6 @@ RCT_EXPORT_METHOD(initKF5:(NSDictionary *)paramDict completion:(RCTResponseSende
         isPhone = phone.length > 0;
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:@"react-native" forKey:@"source"];
     if (isPhone) {
         [params setObject:phone forKey:KF5Phone];
     }else{

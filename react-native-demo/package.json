@@ -9,7 +9,7 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.44.3",
-		"react-native-kf5sdk": "^1.0.4"
+		"react-native-kf5sdk": "^1.0.5"
 	},
 	"devDependencies": {
 		"babel-jest": "23.6.0",

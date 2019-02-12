@@ -24,7 +24,6 @@ public class KF5SdkPackage implements ReactPackage {
         return list;
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }

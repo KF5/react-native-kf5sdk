@@ -9,6 +9,7 @@
     tools:context="com.kf5.sdk.im.ui.AgentGroupChoseActivity">
 
     <LinearLayout
+        android:id="@+id/kf5_top_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/kf5_title_bar_bg">
